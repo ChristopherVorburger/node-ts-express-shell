@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
 
+  emailValidated: {
+    type: Boolean,
+    default: false,
+  },
+
   password: {
     type: String,
     required: [true, "Password is required"],
