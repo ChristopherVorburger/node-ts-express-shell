@@ -9,13 +9,14 @@ export class CategoryController {
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({ error: error.message });
     }
-
-    console.log(`${error}`);
     return res.status(500).json({ error: "Internal server error" });
   };
 
-  getCategory = async (req: Request, res: Response) => {
-    res.json("Get categories");
+  getCategories = (req: Request, res: Response) => {
+    this.categoryService
+      .getCategories()
+      .then((categories) => res.json(categories))
+      .catch((error) => this.handleError(error, res));
   };
 
   createCategory = (req: Request, res: Response) => {
