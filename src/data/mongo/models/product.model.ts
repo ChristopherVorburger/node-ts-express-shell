@@ -26,10 +26,21 @@ const productSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",
     required: true,
+  },
+});
+
+productSchema.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
+  transform(doc, ret, options) {
+    delete ret._id;
+    delete ret.user._id;
+    delete ret.user.password;
   },
 });
 
